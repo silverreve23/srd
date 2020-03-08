@@ -1,25 +1,19 @@
-const { exec } = require('child_process');
-function runCommand(){
-    exec("ls -la", (error, stdout, stderr) => {
-        if (error) {
-            console.log(`error: ${error.message}`);
-            return;
-        }
-        if (stderr) {
-            console.log(`stderr: ${stderr}`);
-            return;
-        }
-        console.log(`stdout: ${stdout}`);
-    });
+const command = require('./command.js');
+const message = 'SRD Hello!';
+const chanels = {
+    shared: 'shared',
+    private: 'private',
 }
 
 module.exports = {
     connection: (socket) => {
-        console.log('socket connect');
-        socket.emit('shared', { hello: 'world' });
-        socket.on('private', (data) => {
-            console.log(data);
-            runCommand();
+        socket.emit(chanels.shared, { message: message });
+        socket.on(chanels.private, (data) => {
+            command.run(data.command).then(stdout => {
+                socket.emit(chanels.private, { message: stdout })
+            }).catch(error => {
+                socket.emit(chanels.private, { error: error })
+            })
         });
     }
 }
