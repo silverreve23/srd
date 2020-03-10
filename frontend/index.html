@@ -7,15 +7,29 @@
     </head>
     <body>
         <div class="content">
-            <article class="message">
-                <div class="message-header">
-                    <input class="input" type="text" placeholder="Text input">
-                    <button class="button" onclick="emit()">RUN</button>
+            <div class="box">
+              <article class="media">
+                <div class="media-left">
+                  <figure class="image is-64x64">
+                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                  </figure>
                 </div>
-                <div class="message-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et sem eget, facilisis sodales sem.
+                <div class="media-content">
+                  <div class="content">
+                      <p><strong>SRD Server</strong> <small>srd@host:</small></p>
+                      <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <input class="is-small input stdin is-fullwidth" type="text" placeholder="Command input">
+                        </div>
+                        <div class="control">
+                            <button class="button is-small" onclick="emit()">RUN</button>
+                        </div>
+                    </div>
+                    <div class="stdout-body"><code>STD Output</code></div>
+                  </div>
                 </div>
-            </article>
+              </article>
+            </div>
         </div>
         <script src="/node_modules/socket.io-client/dist/socket.io.js"></script>
         <script src="/index.js"></script>

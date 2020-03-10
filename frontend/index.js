@@ -1,4 +1,4 @@
-const uri = 'localhost';
+const uri = '3.11.31.141';
 const port = 6030;
 const socket = io(uri+':'+port);
 const chanels = {
@@ -15,8 +15,7 @@ socket.on(chanels.shared, function(data){
 });
 socket.on(chanels.private, function(data){
     console.log('private event');
-    console.log('message:');
-    console.log(data.message);
+    stdOut(data.message);
     console.log('error:');
     console.log(data.error);
 });
@@ -25,6 +24,10 @@ socket.on('disconnect', function(){
 });
 
 function emit(){
-    const command = 'ls -l';
+    const command = document.querySelector('.stdin').value;
     socket.emit(chanels.private, { command: command });
+}
+
+function stdOut(message){
+    document.querySelector('.stdout-body code').innerHTML = message;
 }
