@@ -1,0 +1,13 @@
+[Unit]
+Description="DSR system deamod for srd"
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+User=root
+ExecStart=/bin/srd
+
+[Install]
+WantedBy=multi-user.target
+
